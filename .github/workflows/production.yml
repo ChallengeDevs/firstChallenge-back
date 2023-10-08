@@ -44,7 +44,7 @@ jobs:
     needs: job1
     runs-on: ubuntu-latest
     steps:
-      - name: Baixando Artefato do código buildado
+      - name: Baixando artefato do código buildado
         uses: actions/download-artifact@v3
         with:
           name: artefato
