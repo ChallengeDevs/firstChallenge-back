@@ -1,10 +1,10 @@
-const MONGOOSE = require('mongoose');
+const mongoose = require('mongoose');
 
-const esquema = new MONGOOSE.Schema(
+const schema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: 'é obrigatório!',
+      required: 'Is required!',
     },
     population: {
       type: Number,
@@ -12,7 +12,7 @@ const esquema = new MONGOOSE.Schema(
     },
     continents: {
       type: String,
-      required: 'é obrigatório!',
+      required: 'Is required!',
     },
     capital: {
       type: String,
@@ -26,5 +26,5 @@ const esquema = new MONGOOSE.Schema(
   }
 );
 
-const EsquemaPaises = MONGOOSE.models.Paises || MONGOOSE.model('Paises', esquema);
-module.exports = EsquemaPaises;
+const SchemaCountries = mongoose.models.Countries || mongoose.model('Countries', schema);
+module.exports = SchemaCountries;

@@ -1,4 +1,5 @@
 const mongooseToSwagger = require('mongoose-to-swagger');
+const countries = require('../src/models/countries')
 const swaggerAutogen = require('swagger-autogen')({
   openapi: '3.0.0',
   language: 'pt-BR',
@@ -10,28 +11,29 @@ const endpointsFiles = ['../index.js', '../src/routes.js'];
 let doc = {
   info: {
     version: "1.0.0",
-    title: "API Challenge Júlio",
-    description: "Documentação da API Challenge Júlio"
+    title: "Júlio API Challenge",
+    description: "Challenge Júlio API documentation"
   },
   servers: [
     {
       url: "http://localhost:4000/",
-      description: "Servidor localhost"
+      description: "Server localhost"
     },
     {
       url: "https://first-challenge-back.vercel.app",
-      description: "Servidor de produção"
+      description: "Server de produção"
     }
   ],
   consumes: ['application/json'],
   produces: ['application/json'],
   components: {
     schemas: {
+      Countries: mongooseToSwagger(countries)
     }
-  }
+  },
 }
 
 swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {
-  console.log("Documentação do Swagger gerada encontra-se no arquivo em: " + outputFile);
+  console.log("Swagger documentation generated can be found in the archive at: " + outputFile);
   if (process.env.NODE_ENV !== 'production') require("../index.js");
-})
+});
