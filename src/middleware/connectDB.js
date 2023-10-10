@@ -7,8 +7,7 @@ async function connectBD(req = null, res = null, next = null) {
     try { next(); } catch { };
     return MONGOOSE
   } catch (error) {
-    console.error(error);
-    return error;
+    return console.error(`Error: ${error}`);
   }
 }
 
