@@ -1,5 +1,5 @@
 const mongooseToSwagger = require('mongoose-to-swagger');
-const countries = require('../src/models/countries')
+const SchemaCountries = require('../src/models/countries')
 const swaggerAutogen = require('swagger-autogen')({
   openapi: '3.0.0',
   language: 'pt-BR',
@@ -20,7 +20,7 @@ let doc = {
       description: "Server localhost"
     },
     {
-      url: "https://first-challenge-back.vercel.app",
+      url: "https://first-challenge-back.vercel.app/",
       description: "Server de produção"
     }
   ],
@@ -28,7 +28,7 @@ let doc = {
   produces: ['application/json'],
   components: {
     schemas: {
-      Countries: mongooseToSwagger(countries)
+      Countries: mongooseToSwagger(SchemaCountries)
     }
   },
 }

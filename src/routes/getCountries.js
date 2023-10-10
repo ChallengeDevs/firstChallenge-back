@@ -1,17 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const connectBD = require('../middleware/connectDB')
-const countriesSchema = require('../models/countries')
+const SchemaCountries = require('../models/countries')
 
 router.get('/', connectBD, async function (req, res) {
   try {
     // #swagger.tags = ['Get All Countries']
     // #swagger.description = "Endpoint to get all countries from the database."
-    const responseDB = await countriesSchema.find({});
+    const responseDB = await SchemaCountries.find({});
 
-    res.status(200).json({ status: "ok", statusMessage: "Countries listed successfully!", response: responseDB })
+    if (responseDB.length > 0) {
+      res.status(200).json({ status: "ok", statusMessage: "Countries listed successfully!", response: responseDB });
+    } else {
+      res.status(404).json({ status: "error", statusMessage: "No countries found in the database." });
+    }
   } catch (error) {
-    return console.error(`Erro: ${error}`)
+    return res.status(500).json({ status: "error", statusMessage: `Error: ${error}` });
   }
 });
 

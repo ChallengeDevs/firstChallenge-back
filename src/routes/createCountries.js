@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const connectDB = require('../middleware/connectDB');
-const countriesSchema = require('../models/countries')
+const SchemaCountries = require('../models/countries')
 
 router.post('/', connectDB, async function (req, res, next) {
   try {
@@ -22,10 +22,10 @@ router.post('/', connectDB, async function (req, res, next) {
         let capital = element.capital[0];
         let flags = element.flags;
 
-        const existingCountrie = await countriesSchema.findOne({ name });
+        const existingCountrie = await SchemaCountries.findOne({ name });
 
         if (!existingCountrie) {
-          await countriesSchema.create({ name, population, continents, capital, flags });
+          await SchemaCountries.create({ name, population, continents, capital, flags });
 
           addedCountries.push(name)
         }
