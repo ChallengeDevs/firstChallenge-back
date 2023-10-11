@@ -16,7 +16,7 @@ router.post('/', connectDB, async function (req, res, next) {
       const addedCountries = [];
 
       for (const element of firstTenObj) {
-        let name = element.name.official;
+        let name = element.name.common;
         let population = element.population;
         let continents = element.continents[0];
         let capital = element.capital[0];
